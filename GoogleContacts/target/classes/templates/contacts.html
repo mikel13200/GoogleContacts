@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f5f5f5; /* Deep dark background */
+            background: #f5f5f5;
             color: #e0e0e0;
             min-height: 100vh;
             padding: 2rem;
@@ -29,7 +29,6 @@
             max-width: 1100px;
         }
 
-        /* Header */
         .header {
             background: rgba(20, 20, 30, 0.8);
             padding: 1.2rem;
@@ -43,7 +42,7 @@
 
         .header h1 {
             font-size: 1.6rem;
-            color: #00eaff; /* Neon Cyan */
+            color: #00eaff;
             text-shadow: 0 0 10px #00eaff;
         }
 
@@ -52,7 +51,6 @@
             gap: 1rem;
         }
 
-        /* Buttons */
         .btn {
             padding: 0.6rem 1.2rem;
             border-radius: 8px;
@@ -75,7 +73,6 @@
             box-shadow: 0 0 12px #00eaff;
         }
 
-        /* Content */
         .main-content {
             background: rgba(20, 20, 30, 0.9);
             border-radius: 15px;
@@ -84,7 +81,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Table */
         .contacts-table {
             width: 100%;
             border-collapse: collapse;
@@ -108,7 +104,6 @@
             background: rgba(30, 30, 50, 0.5);
         }
 
-        /* Form */
         .form-container {
             padding: 1.5rem;
             background: rgba(20, 20, 30, 0.9);
@@ -139,7 +134,6 @@
             box-shadow: 0 0 8px #00eaff;
         }
 
-        /* Contact Info */
         .contact-info-list {
             display: flex;
             flex-direction: column;
@@ -160,7 +154,6 @@
             color: #00eaff;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -197,7 +190,6 @@
             </div>
         </div>
 
-        <!-- Add Contact Form -->
         <div id="addContactForm" class="form-container">
             <h2 class="form-title">Add New Contact</h2>
             <form id="addContactForm" autocomplete="on">
@@ -234,7 +226,6 @@
             </form>
         </div>
 
-        <!-- Update Contact Form -->
         <div id="updateContactForm" class="form-container">
             <h2 class="form-title">Update Contact</h2>
             <form id="updateContactForm" autocomplete="on">
@@ -312,15 +303,12 @@
                 document.getElementById('updateContactForm').style.display = 'block';
                 document.getElementById('addContactForm').style.display = 'none';
 
-                // Set resource name
                 document.getElementById('resourceName').value = resourceName;
 
-                // Split name into first and last name
                 const nameParts = name.split(" ");
                 document.getElementById('updateFirstName').value = nameParts[0] || "";
                 document.getElementById('updateLastName').value = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
 
-                // Set birthday if available
                 if (birthdays && birthdays.length > 0 && birthdays[0].date) {
                     const date = birthdays[0].date;
                     const formattedDate = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
@@ -329,7 +317,6 @@
                     document.getElementById('updateBirthday').value = '';
                 }
 
-                // Clear and populate email fields
                 const emailList = document.getElementById('updateEmailList');
                 emailList.innerHTML = '';
                 if (emailAddresses && emailAddresses.length > 0) {
@@ -348,7 +335,6 @@
                     addEmailField('updateEmailList');
                 }
 
-                // Clear and populate phone fields
                 const phoneList = document.getElementById('updatePhoneList');
                 phoneList.innerHTML = '';
                 if (phoneNumbers && phoneNumbers.length > 0) {
@@ -461,7 +447,6 @@
                     data.connections.forEach(contact => {
                         const name = contact.names ? contact.names[0].displayName : "No Name";
                         
-                        // Format emails with icons
                         let emailsHtml = '<div class="contact-info-list">';
                         if (contact.emailAddresses && contact.emailAddresses.length > 0) {
                             emailsHtml += contact.emailAddresses.map(e => 
@@ -478,7 +463,6 @@
                         }
                         emailsHtml += '</div>';
 
-                        // Format phone numbers with icons
                         let phonesHtml = '<div class="contact-info-list">';
                         if (contact.phoneNumbers && contact.phoneNumbers.length > 0) {
                             phonesHtml += contact.phoneNumbers.map(p => 
@@ -501,10 +485,8 @@
                             birthday = `${date.year}-${String(date.month).padStart(2, '0')}-${String(date.day).padStart(2, '0')}`;
                         }
 
-                        // Escape special characters in the name
                         const escapedName = name.replace(/'/g, "\\'").replace(/"/g, '\\"');
                         
-                        // Create safe JSON strings for the data
                         const safeEmailAddresses = JSON.stringify(contact.emailAddresses || []).replace(/"/g, '&quot;');
                         const safePhoneNumbers = JSON.stringify(contact.phoneNumbers || []).replace(/"/g, '&quot;');
                         const safeBirthdays = JSON.stringify(contact.birthdays || []).replace(/"/g, '&quot;');
@@ -618,7 +600,6 @@
             }
         }
 
-        // Add this new function to handle the update click
         function handleUpdate(resourceName, name, emailAddresses, phoneNumbers, birthdays) {
             try {
                 console.log("Update clicked for:", { resourceName, name, emailAddresses, phoneNumbers, birthdays });
